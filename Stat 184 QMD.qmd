@@ -16,16 +16,77 @@ execute:
 
 # Introduction
 
-This report shows a reproducible data analysis of individual NBA player attributes and the effect they have on their free throw percentages (>= 150 attempts) using Quarto. All results (tables and graphs) are created directly from code, so anyone can run the file and get the same results. The goal is to clearly explain the data and any conclusions we can make from it.
+This report presents an exploratory data analysis of NBA player attributes and their relationship to free throw percentage among players with at least 150 free throw attempts. The goal is to investigate whether factors such as player role, physical characteristics, and playing time are associated with free throw shooting performance.
 
-# 
+---
+
+# Data Provenance
 
 
+
+---
+
+# FAIR and CARE Principles
+
+
+
+---
+
+# Data Cleaning and Feature Creation
+
+Before analysis, the dataset was cleaned and transformed. This included:
+
+- Removing percentage symbols from free throw percentage
+- Removing commas from total minutes
+- Converting variables to numeric format
+- Creating new variables such as:
+  - Free throw attempts per game
+  - Minutes per game
+  - Wingspan-to-height ratio
+
+These transformations ensure that the data are consistent and suitable for analysis.
+
+---
+
+# Exploratory Data Analysis
+
+## Robert
+
+---
+
+## Connor
+
+---
+
+## Aidan
+
+
+
+---
+
+# Overall Data Story
+
+
+
+---
+
+# Conclusion
+
+
+---
+
+# Open Science and Reproducibility
+
+
+
+---
 
 # Author Contributions
+
 - Robert Dang: 
 - Connor Box: 
-- Aidan Wieners 
+- Aidan Wieners: 
+
+---
 
 # Appendix: Code
-
