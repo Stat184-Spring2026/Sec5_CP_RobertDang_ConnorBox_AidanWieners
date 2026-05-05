@@ -397,8 +397,11 @@ df |>
 
 Connor's code 
 ```{r}
+
 #| eval: false
 #| echo: true
+
+### Author: Connor Box
 
 library(tidyverse)
 library(knitr)
