@@ -18,7 +18,6 @@ execute:
 
 This report presents a data analysis and exploration of the question: "What makes a good NBA free throw shooter?" We used player height and position and examined their relationship to free throw percentage among players with at least 150 free throw attempts during the 2025-2026 regular season.
 
----
 
 # Data Provenance
 
@@ -39,7 +38,6 @@ throw attempts (FTA).
 The data was manually recorded on 4/28/2026. The  
 statistics reflect the 2025-2026 NBA regular season as displayed 
 on Databallr at the time of collection.
----
 
 ## Where It Came From
 Statistics were transcribed by hand from databallr.com into an Excel 
@@ -52,8 +50,6 @@ throw shooting percentage.
 
 ## How It Was Collected
 Team members used the features on Databallr to retrieve the necessary statistics. manually looked up each player on Databallr and recorded into an Excel file. This file was then exported as a CSV for use in R. 
-
----
 
 # FAIR Principles
 - **Findable:** The original statistics are publicly viewable on 
@@ -81,13 +77,133 @@ Before analysis, the dataset was cleaned and transformed. This included:
 
 These transformations ensure that the data are consistent and suitable for analysis.
 
----
 
 # Exploratory Data Analysis
 
 ## Robert
 
----
+In this section, we look at if the height and position of the players and see if they correlate, which is the basis of our overall analysis. 
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Tidyverse Style Guide
+
+# Step 1: Load packages
+
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(ggrepel)
+
+
+# Step 2: Load and tidy the data
+
+df <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    FT_pct = `FT%`,
+    Height = `Height (in)`
+  ) |>
+  mutate(
+    FT_pct = as.numeric(gsub("%", "", FT_pct))
+  )
+
+
+# Step 3: Summarize average height and FT% per position
+
+position_summary <- df |>
+  group_by(Position) |>
+  summarise(
+    Avg_Height = mean(Height, na.rm = TRUE),   # average height per position
+    Avg_FT_pct = mean(FT_pct, na.rm = TRUE),   # average FT% per position
+    Count      = n()                            # how many players per position
+  )
+
+
+# Plot shows the spread of heights within each position
+
+ggplot(df, aes(x = reorder(Position, Height), y = Height, fill = Position)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
+  geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) +   # show individual players
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(labels = function(x) paste0(x, '"')) +
+  labs(
+    title    = "Height Distribution by Position",
+    subtitle = "Positions ordered by median height",
+    x        = "Position",
+    y        = "Height (inches)",
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title      = element_text(face = "bold"),
+    plot.subtitle   = element_text(color = "grey40"),
+    legend.position = "none"  
+  )
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Step 1: Load Packages 
+
+library(dplyr)
+library(readr)
+library(knitr)
+library(kableExtra)
+
+# Step 2: Load and tidy the data
+
+df <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    ft_pct = `FT%`,
+    height = `Height (in)`
+  ) |>
+  mutate(
+    ft_pct = as.numeric(gsub("%", "", ft_pct))
+  )
+
+# Table includes a height Summary by position
+
+df |>
+  group_by(Position) |>
+  summarise(
+    `Player Count`       = n(),
+    `Avg Height (in)`    = round(mean(height, na.rm = TRUE), 1),
+    `Median Height (in)` = round(median(height, na.rm = TRUE), 1),
+    `Min Height (in)`    = round(min(height, na.rm = TRUE), 1),
+    `Max Height (in)`    = round(max(height, na.rm = TRUE), 1)
+  ) |>
+  arrange(desc(`Avg Height (in)`)) |>
+  kable(
+    caption = "Height Summary by Position for Players Who Shot At Least 150 FT's (tallest to shortest)",
+    align   = c("l", "c", "c", "c", "c", "c")
+  ) |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width        = FALSE
+  )
+```
+
+The box plot and summary table together confirm a clear and consistent 
+relationship between position and height in the 2025-2026 NBA season. 
+From the table, we see that centers are the tallest position with an average height of 82.9 inches, 
+while point guards are the shortest at an average of 74.6 inches, a 
+difference of over 8 inches. 
+
+Looking at the box plot reveals that the positions 
+follow a staircase pattern from PG to C, suggesting that 
+height is a strong defining characteristic of positional assignment in 
+the NBA. Also, most positions have relatively tight height 
+distributions, meaning players at the same position tend to be similar 
+in height. Centers show the widest spread, ranging from 80.8 to 88.0 
+inches, indicating more variation at that position than any other. 
+Point guards, by contrast, are tightly clustered between 72.5 and 77.5 
+inches, with very little variation.
+
 
 ## Connor
 
@@ -153,23 +269,15 @@ kable(
 
 The results suggest that height is not a strong predictor of free throw performance, as correlations remain small across most positions.
 
----
 
 ## Aidan
 
----
 
-# Overall Data Story
+# Overall Conclusion
 
----
-
-# Conclusion
-
----
 
 # Open Science and Reproducibility
 
----
 
 # Author Contributions
 
@@ -179,10 +287,115 @@ The results suggest that height is not a strong predictor of free throw performa
 
 
 # AI Usage 
----
+
 
 # Appendix: Code
+Robert's code 
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
 
+# Tidyverse Style Guide
+
+# Step 1: Load packages
+
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(ggrepel)
+
+
+# Step 2: Load and tidy the data
+
+df <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    FT_pct = `FT%`,
+    Height = `Height (in)`
+  ) |>
+  mutate(
+    FT_pct = as.numeric(gsub("%", "", FT_pct))
+  )
+
+
+# Step 3: Summarize average height and FT% per position
+
+position_summary <- df |>
+  group_by(Position) |>
+  summarise(
+    Avg_Height = mean(Height, na.rm = TRUE),   # average height per position
+    Avg_FT_pct = mean(FT_pct, na.rm = TRUE),   # average FT% per position
+    Count      = n()                            # how many players per position
+  )
+
+
+# Plot shows the spread of heights within each position
+
+ggplot(df, aes(x = reorder(Position, Height), y = Height, fill = Position)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
+  geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) +   # show individual players
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(labels = function(x) paste0(x, '"')) +
+  labs(
+    title    = "Height Distribution by Position",
+    subtitle = "Positions ordered by median height",
+    x        = "Position",
+    y        = "Height (inches)",
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title      = element_text(face = "bold"),
+    plot.subtitle   = element_text(color = "grey40"),
+    legend.position = "none"  
+  )
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Step 1: Load Packages 
+
+library(dplyr)
+library(readr)
+library(knitr)
+library(kableExtra)
+
+# Step 2: Load and tidy the data
+
+df <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    ft_pct = `FT%`,
+    height = `Height (in)`
+  ) |>
+  mutate(
+    ft_pct = as.numeric(gsub("%", "", ft_pct))
+  )
+
+# Table includes a height Summary by position
+
+df |>
+  group_by(Position) |>
+  summarise(
+    `Player Count`       = n(),
+    `Avg Height (in)`    = round(mean(height, na.rm = TRUE), 1),
+    `Median Height (in)` = round(median(height, na.rm = TRUE), 1),
+    `Min Height (in)`    = round(min(height, na.rm = TRUE), 1),
+    `Max Height (in)`    = round(max(height, na.rm = TRUE), 1)
+  ) |>
+  arrange(desc(`Avg Height (in)`)) |>
+  kable(
+    caption = "Height Summary by Position for Players Who Shot At Least 150 FT's (tallest to shortest)",
+    align   = c("l", "c", "c", "c", "c", "c")
+  ) |>
+  kable_styling(
+    bootstrap_options = c("striped", "hover", "condensed"),
+    full_width        = FALSE
+  )
+```
+
+Connor's code 
 ```{r}
 #| eval: false
 #| echo: true
