@@ -92,71 +92,14 @@ In this section, we look at if the height and position of the players and see if
 # Tidyverse Style Guide
 
 # Step 1: Load packages
-
 library(ggplot2)
 library(dplyr)
 library(readr)
 library(ggrepel)
-
-
-# Step 2: Load and tidy the data
-
-df <- read_csv("NBAPlayerStats.csv") |>
-  rename(
-    FT_pct = `FT%`,
-    Height = `Height (in)`
-  ) |>
-  mutate(
-    FT_pct = as.numeric(gsub("%", "", FT_pct))
-  )
-
-
-# Step 3: Summarize average height and FT% per position
-
-position_summary <- df |>
-  group_by(Position) |>
-  summarise(
-    Avg_Height = mean(Height, na.rm = TRUE),   # average height per position
-    Avg_FT_pct = mean(FT_pct, na.rm = TRUE),   # average FT% per position
-    Count      = n()                            # how many players per position
-  )
-
-
-# Plot shows the spread of heights within each position
-
-ggplot(df, aes(x = reorder(Position, Height), y = Height, fill = Position)) +
-  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
-  geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) +   # show individual players
-  scale_fill_brewer(palette = "Set2") +
-  scale_y_continuous(labels = function(x) paste0(x, '"')) +
-  labs(
-    title    = "Height Distribution by Position",
-    subtitle = "Positions ordered by median height",
-    x        = "Position",
-    y        = "Height (inches)",
-  ) +
-  theme_minimal(base_size = 13) +
-  theme(
-    plot.title      = element_text(face = "bold"),
-    plot.subtitle   = element_text(color = "grey40"),
-    legend.position = "none"  
-  )
-```
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Step 1: Load Packages 
-
-library(dplyr)
-library(readr)
 library(knitr)
 library(kableExtra)
 
 # Step 2: Load and tidy the data
-
 df <- read_csv("NBAPlayerStats.csv") |>
   rename(
     ft_pct = `FT%`,
@@ -166,8 +109,37 @@ df <- read_csv("NBAPlayerStats.csv") |>
     ft_pct = as.numeric(gsub("%", "", ft_pct))
   )
 
-# Table includes a height Summary by position
+# Step 3: Summarize average height and FT% per position
+position_summary <- df |>
+  group_by(Position) |>
+  summarise(
+    avg_height = mean(height, na.rm = TRUE),
+    avg_ft_pct = mean(ft_pct, na.rm = TRUE),
+    count      = n()
+  )
 
+# Plot for height distribution by position
+df |>
+  mutate(Position = reorder(Position, height)) |>
+  ggplot(aes(x = Position, y = height, fill = Position)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
+  geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) +
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(labels = function(x) paste0(x, '"')) +
+  labs(
+    title    = "Height Distribution by Position",
+    subtitle = "Positions ordered by median height",
+    x        = "Position",
+    y        = "Height (inches)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title      = element_text(face = "bold"),
+    plot.subtitle   = element_text(color = "grey40"),
+    legend.position = "none"
+  )
+
+# Table for height summary by position
 df |>
   group_by(Position) |>
   summarise(
@@ -292,78 +264,21 @@ The results suggest that height is not a strong predictor of free throw performa
 # Appendix: Code
 Robert's code 
 ```{r}
-#| echo: false
-#| warning: false
-#| message: false
+#| eval: false
+#| echo: true
+#| results: hide
 
 # Tidyverse Style Guide
 
 # Step 1: Load packages
-
 library(ggplot2)
 library(dplyr)
 library(readr)
 library(ggrepel)
-
-
-# Step 2: Load and tidy the data
-
-df <- read_csv("NBAPlayerStats.csv") |>
-  rename(
-    FT_pct = `FT%`,
-    Height = `Height (in)`
-  ) |>
-  mutate(
-    FT_pct = as.numeric(gsub("%", "", FT_pct))
-  )
-
-
-# Step 3: Summarize average height and FT% per position
-
-position_summary <- df |>
-  group_by(Position) |>
-  summarise(
-    Avg_Height = mean(Height, na.rm = TRUE),   # average height per position
-    Avg_FT_pct = mean(FT_pct, na.rm = TRUE),   # average FT% per position
-    Count      = n()                            # how many players per position
-  )
-
-
-# Plot shows the spread of heights within each position
-
-ggplot(df, aes(x = reorder(Position, Height), y = Height, fill = Position)) +
-  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
-  geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) +   # show individual players
-  scale_fill_brewer(palette = "Set2") +
-  scale_y_continuous(labels = function(x) paste0(x, '"')) +
-  labs(
-    title    = "Height Distribution by Position",
-    subtitle = "Positions ordered by median height",
-    x        = "Position",
-    y        = "Height (inches)",
-  ) +
-  theme_minimal(base_size = 13) +
-  theme(
-    plot.title      = element_text(face = "bold"),
-    plot.subtitle   = element_text(color = "grey40"),
-    legend.position = "none"  
-  )
-```
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Step 1: Load Packages 
-
-library(dplyr)
-library(readr)
 library(knitr)
 library(kableExtra)
 
 # Step 2: Load and tidy the data
-
 df <- read_csv("NBAPlayerStats.csv") |>
   rename(
     ft_pct = `FT%`,
@@ -373,8 +288,37 @@ df <- read_csv("NBAPlayerStats.csv") |>
     ft_pct = as.numeric(gsub("%", "", ft_pct))
   )
 
-# Table includes a height Summary by position
+# Step 3: Summarize average height and FT% per position
+position_summary <- df |>
+  group_by(Position) |>
+  summarise(
+    avg_height = mean(height, na.rm = TRUE),
+    avg_ft_pct = mean(ft_pct, na.rm = TRUE),
+    count      = n()
+  )
 
+# Plot for height distribution by position
+df |>
+  mutate(Position = reorder(Position, height)) |>
+  ggplot(aes(x = Position, y = height, fill = Position)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) +
+  geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) +
+  scale_fill_brewer(palette = "Set2") +
+  scale_y_continuous(labels = function(x) paste0(x, '"')) +
+  labs(
+    title    = "Height Distribution by Position",
+    subtitle = "Positions ordered by median height",
+    x        = "Position",
+    y        = "Height (inches)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title      = element_text(face = "bold"),
+    plot.subtitle   = element_text(color = "grey40"),
+    legend.position = "none"
+  )
+
+# Table for height summary by position
 df |>
   group_by(Position) |>
   summarise(
