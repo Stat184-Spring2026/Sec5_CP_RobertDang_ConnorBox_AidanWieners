@@ -9,8 +9,8 @@ format:
     number-sections: true
     colorlinks: true
 execute:
-  echo: false      
-  warning: false  
+  echo: false
+  warning: false
   message: false
 ---
 
@@ -39,6 +39,7 @@ throw attempts (FTA).
 The data was manually recorded on 4/28/2026. The  
 statistics reflect the 2025-2026 NBA regular season as displayed 
 on Databallr at the time of collection.
+---
 
 ## Where It Came From
 Statistics were transcribed by hand from databallr.com into an Excel 
@@ -77,10 +78,6 @@ Before analysis, the dataset was cleaned and transformed. This included:
 - Removing percentage symbols from free throw percentage
 - Removing commas from total minutes
 - Converting variables to numeric format
-- Creating new variables such as:
-  - Free throw attempts per game
-  - Minutes per game
-  - Wingspan-to-height ratio
 
 These transformations ensure that the data are consistent and suitable for analysis.
 
@@ -94,31 +91,139 @@ These transformations ensure that the data are consistent and suitable for analy
 
 ## Connor
 
+This section examines whether a player’s height is related to their free throw percentage within each position. To evaluate this, we calculate the correlation between height and free throw percentage for each position.
+
+```{r}
+library(tidyverse)
+library(knitr)
+
+nba_raw <- read_csv("NBAPlayerStats.csv")
+
+nba_clean <- nba_raw |>
+  rename(
+    position = Position,
+    ft_percent = `FT%`,
+    height_in = `Height (in)`
+  ) |>
+  mutate(
+    ft_percent = as.numeric(str_remove(ft_percent, "%")),
+    height_in = as.numeric(height_in)
+  )
+
+position_corr <- nba_clean |>
+  group_by(position) |>
+  summarise(
+    correlation = round(cor(height_in, ft_percent, use = "complete.obs"), 2),
+    avg_ft = round(mean(ft_percent, na.rm = TRUE), 1),
+    avg_height = round(mean(height_in, na.rm = TRUE), 1),
+    n_players = n(),
+    .groups = "drop"
+  )
+```
+
+As shown in @fig-connor, most positions exhibit weak relationships between height and free throw percentage.
+
+```{r}
+#| label: fig-connor
+#| fig-cap: "Correlation between height and free throw percentage by position."
+#| fig-alt: "Bar chart showing correlation between height and free throw percentage for each NBA position."
+#| fig-pos: "H"
+
+ggplot(position_corr, aes(x = position, y = correlation)) +
+  geom_col(fill = "skyblue") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    x = "Position",
+    y = "Correlation"
+  ) +
+  theme_minimal()
+```
+
+@tbl-connor provides the corresponding numerical values.
+
+```{r}
+#| label: tbl-connor
+#| tbl-cap: "Correlation between height and free throw percentage by position."
+
+kable(
+  position_corr,
+  col.names = c("Position", "Correlation", "Avg FT%", "Avg Height", "Players")
+)
+```
+
+The results suggest that height is not a strong predictor of free throw performance, as correlations remain small across most positions.
+
 ---
 
 ## Aidan
 
 ---
 
-# Conclusion
+# Overall Data Story
 
+---
+
+# Conclusion
 
 ---
 
 # Open Science and Reproducibility
 
-
-
 ---
 
 # Author Contributions
 
-- Robert Dang: 
-- Connor Box: 
-- Aidan Wieners: 
+- Robert Dang:
+- Connor Box:
+- Aidan Wieners:
 
 
 # AI Usage 
 ---
 
 # Appendix: Code
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(tidyverse)
+library(knitr)
+
+nba_raw <- read_csv("NBAPlayerStats.csv")
+
+nba_clean <- nba_raw |>
+  rename(
+    position = Position,
+    ft_percent = `FT%`,
+    height_in = `Height (in)`
+  ) |>
+  mutate(
+    ft_percent = as.numeric(str_remove(ft_percent, "%")),
+    height_in = as.numeric(height_in)
+  )
+
+position_corr <- nba_clean |>
+  group_by(position) |>
+  summarise(
+    correlation = round(cor(height_in, ft_percent, use = "complete.obs"), 2),
+    avg_ft = round(mean(ft_percent, na.rm = TRUE), 1),
+    avg_height = round(mean(height_in, na.rm = TRUE), 1),
+    n_players = n(),
+    .groups = "drop"
+  )
+
+ggplot(position_corr, aes(x = position, y = correlation)) +
+  geom_col(fill = "skyblue") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    x = "Position",
+    y = "Correlation"
+  ) +
+  theme_minimal()
+
+kable(
+  position_corr,
+  col.names = c("Position", "Correlation", "Avg FT%", "Avg Height", "Players")
+)
+```
