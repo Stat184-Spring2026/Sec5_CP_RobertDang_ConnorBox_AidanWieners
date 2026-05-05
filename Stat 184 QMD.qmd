@@ -16,21 +16,59 @@ execute:
 
 # Introduction
 
-This report presents an exploratory data analysis of NBA player attributes and their relationship to free throw percentage among players with at least 150 free throw attempts. The goal is to investigate whether factors such as player role, physical characteristics, and playing time are associated with free throw shooting performance.
+This report presents a data analysis and exploration of the question: "What makes a good NBA free throw shooter?" We used player height and position and examined their relationship to free throw percentage among players with at least 150 free throw attempts during the 2025-2026 regular season.
 
 ---
 
 # Data Provenance
 
+## Who Collected It
+The data was manually collected and compiled by our team. Player 
+statistics were gathered by hand from Databallr (databallr.com) and 
+entered into an Excel spreadsheet, which was then saved as a CSV file 
+for use in this analysis.
 
+## What the Data Is
+Each case (row) in the dataset represents one NBA player during the 
+2025-2026 regular season. The attributes include player name, team, 
+position, physical measurements (height and wingspan in inches), and 
+performance statistics such as free throw percentage (FT%) and free 
+throw attempts (FTA).
+
+## When It Was Collected
+The data was manually recorded on 4/28/2026. The  
+statistics reflect the 2025-2026 NBA regular season as displayed 
+on Databallr at the time of collection.
+
+## Where It Came From
+Statistics were transcribed by hand from databallr.com into an Excel 
+spreadsheet. The original source of the underlying data is the NBA's 
+official game and player records.
+
+## Why It Was Collected
+The data was collected to investigate how player height and position relate to free 
+throw shooting percentage.
+
+## How It Was Collected
+Team members used the features on Databallr to retrieve the necessary statistics. manually looked up each player on Databallr and recorded into an Excel file. This file was then exported as a CSV for use in R. 
 
 ---
 
-# FAIR and CARE Principles
+# FAIR Principles
+- **Findable:** The original statistics are publicly viewable on 
+  databallr.com. Our compiled dataset is stored in our team's 
+  GitHub repository.
+- **Accessible:** The CSV file is available in our repo and can be 
+  downloaded by anyone with access to it.
+- **Interoperable:** The CSV format is compatible with many coding languages
+- **Reusable:** Column names are clearly labeled and the data 
+  context is well documented in this report, making it reusable 
+  for future analysis.
 
-
-
----
+# CARE Principles
+This dataset covers NBA players whose statistics are part 
+of the public record. No private or sensitive personal information 
+was collected beyond what is officially published by the league. 
 
 # Data Cleaning and Feature Creation
 
@@ -59,14 +97,6 @@ These transformations ensure that the data are consistent and suitable for analy
 ---
 
 ## Aidan
-
-
-
----
-
-# Overall Data Story
-
-
 
 ---
 
