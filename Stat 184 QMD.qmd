@@ -184,9 +184,11 @@ The results suggest that height is not a strong predictor of free throw performa
 # Appendix: Code
 
 ```{r}
-### Author: Connor Box
+
 #| eval: false
 #| echo: true
+
+### Author: Connor Box
 
 library(tidyverse)
 library(knitr)
