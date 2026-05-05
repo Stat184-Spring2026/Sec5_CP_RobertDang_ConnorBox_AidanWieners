@@ -237,7 +237,8 @@ position_corr <- nba_clean |>
   )
 ```
 
-As shown in @fig-connor, most positions exhibit weak relationships between height and free throw percentage.
+As shown in @fig-connor, most positions exhibit correlations close to zero, indicating little to no linear relationship between height and free throw percentage within those groups. This suggests that among players who already share a similar role and general body type, being slightly taller or shorter does not meaningfully impact free throw performance.
+
 
 ```{r}
 #| label: fig-connor
@@ -255,7 +256,8 @@ ggplot(position_corr, aes(x = position, y = correlation)) +
   theme_minimal()
 ```
 
-@tbl-connor provides the corresponding numerical values.
+@tbl-connor provides the corresponding numerical values. While centers show a modest positive correlation and shooting guards show a more noticeable negative correlation, these patterns are inconsistent across positions and likely reflect variation within the sample rather than a strong underlying trend.
+
 
 ```{r}
 #| label: tbl-connor
@@ -267,7 +269,8 @@ kable(
 )
 ```
 
-The results suggest that height is not a strong predictor of free throw performance, as correlations remain small across most positions.
+These results suggest that while height is clearly associated with position, it is not a strong predictor of free throw shooting within positions. In other words, once players are grouped by position, differences in height do not explain much of the variation in free throw percentage, indicating that shooting ability is driven more by individual skill than physical size.
+
 
 
 ## Aidan
