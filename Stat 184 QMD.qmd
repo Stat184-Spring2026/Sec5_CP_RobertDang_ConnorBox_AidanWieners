@@ -184,7 +184,6 @@ The results suggest that height is not a strong predictor of free throw performa
 # Appendix: Code
 
 ```{r}
-
 #| eval: false
 #| echo: true
 
