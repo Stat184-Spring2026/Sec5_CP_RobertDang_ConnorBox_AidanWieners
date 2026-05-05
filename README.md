@@ -1,10 +1,11 @@
-# Project Title
+# What Makes a Good Free Throw Shooter?
 
-Write a 1-2 sentences that quickly and clearly convey what your repo is for.
+This repo will display our data visulisations and findings while exploring if there are certain attributes of an NBA player that have a high correlation with their free throw percentage rate in the 2025/2026 regular season.
 
 ## Overview
 
-Expand on those introductory sentences with a brief but informative description of your project's purpose and goals. This section should help visitors decide whether they should dig deeper into your repo/project.
+We are exploring if a player's hright, wingspan, free throw attempts, and position have any real relationship with their FT%. 
+To keep things cleaner, we only looked at players who took at least 150 free throws this season. 
 
 ### Interesting Insight (Optional)
 
@@ -25,4 +26,6 @@ Use this section to explain the structure of your repo. This should help visitor
 
 ## Authors
 
-Give information about who are the authors of the project and how people can get in touch if they have questions.
+Aidan Wieners- aaw5817@psu.edu
+Robert Dang- rkd5479@psu.edu
+Connor Box- cdb5993@psu.edu
