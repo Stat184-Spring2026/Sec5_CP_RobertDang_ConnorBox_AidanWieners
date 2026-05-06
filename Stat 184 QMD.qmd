@@ -246,7 +246,82 @@ These results suggest that while height is clearly associated with position, it 
 
 
 ## Aidan
+Robert confirmed that height varies by position and Connor showed that height has little correlation with accuracy within each position, so I am zooming out and looking at the broader question: 
+When we look at each position as a whole, which position tends to shoot free throws better on average?
+To explore this, I summarized the data by position and created a bubble chart where each bubble represents one position to show the correlation.
 
+```{r}
+#| eval: false
+#| echo: true
+
+#Tidyverse style guide
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# Tidy the data
+nba <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    ft_pct   = `FT%`,
+    height   = `Height (in)`,
+    position = Position
+  ) |>
+  mutate(
+    ft_pct = as.numeric(gsub("%", "", ft_pct)),
+    height = as.numeric(height)
+  )
+
+# Summarize by position
+pos_summary <- nba |>
+  group_by(position) |>
+  summarise(
+    avg_height = round(mean(height, na.rm = TRUE), 1),
+    avg_ft_pct = round(mean(ft_pct,  na.rm = TRUE), 1),
+    n_players  = n(),
+    .groups = "drop"
+  )
+```
+@plot-aidan makes the trend pretty easy to see. You can see how there is little difference in the average FT% in guards and small forards, who also tend to shoot much more accurate than bigs, as they're all fairly even on the Y-axis. The scatter plot helps show a pretty consistent drop off in FT% as height rises, shown by about a 5% drop from small forwards to power forwards, and another 5% drop from power forwards to centers.
+We can see that players who are either point guards, shooting guards, or small forwards are on average 79 inches or shorter. From this we can make the observation that players in those positions typicially have the ideal attributes to shoot a much more accurate FT% compared to the larger positions in power forwards and centers.  
+
+```{r}
+#Plot-aidan — Average height vs. FT% by position
+#| label: plot-aidan
+#| fig-cap: "Average height vs. average FT% by position. Bubble size shows number of players in each group."
+
+ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
+                        size = n_players, color = position)) +
+  geom_point(alpha = 0.8) +
+  geom_text(aes(label = position), color = "black", size = 4, hjust = 0.5, vjust = 0.5)+  
+  scale_size_continuous(range = c(6, 14), name = "# of Players") +
+  scale_color_brewer(palette = "Set1", guide = "none") +
+  labs(
+    title = "Average Height vs. Average Free Throw % by Position",
+    x = "Average Height (inches)",
+    y = "Average Free Throw %"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title    = element_text(face = "bold")
+  )
+``` 
+@table-aidan helps viewers clearly see how close the FT% really is between point guards, shooting guards, and small forwards, even given the signifigant average height difference from PG-SF.
+Having the actual numbers displayed in addition to the table really helps add emphasis on those three positions shooting within 1.1% of each other on average. 
+
+```{r}
+# Table-aidan — Average height vs. FT% by position
+
+#| label: tab-aidan
+#| fig-cap: "Provides the corresponding numerical values (Position, Avg Height, Avg FT%, # of Players)."
+pos_summary |>
+  arrange(desc(avg_ft_pct)) |>
+  kable(
+    caption = "Average Height and Free Throw Percentage by Position",
+    col.names = c("Position", "Avg Height (in)", "Avg Free Throw %", "# Players"),
+    align = c("l", "c", "c", "c")
+  )
+```
 
 # Overall Conclusion
 
@@ -388,4 +463,69 @@ kable(
   position_corr,
   col.names = c("Position", "Correlation", "Avg FT%", "Avg Height", "Players")
 )
+```
+Aidan's Code
+```{r}
+#| eval: false
+#| echo: true
+
+### Author: Aidan Wieners
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# Tidy the data
+nba <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    ft_pct   = `FT%`,
+    height   = `Height (in)`,
+    position = Position
+  ) |>
+  mutate(
+    ft_pct = as.numeric(gsub("%", "", ft_pct)),
+    height = as.numeric(height)
+  )
+
+# Summarize by position
+pos_summary <- nba |>
+  group_by(position) |>
+  summarise(
+    avg_height = round(mean(height, na.rm = TRUE), 1),
+    avg_ft_pct = round(mean(ft_pct,  na.rm = TRUE), 1),
+    n_players  = n(),
+    .groups = "drop"
+  )
+
+#Plot-aidan — Average height vs. FT% by position
+#| label: plot-aidan
+#| fig-cap: "Average height vs. average FT% by position. Bubble size shows number of players in each group."
+
+ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
+                        size = n_players, color = position)) +
+  geom_point(alpha = 0.8) +
+  geom_text(aes(label = position), color = "black", size = 4, hjust = 0.5, vjust = 0.5)+  
+  scale_size_continuous(range = c(6, 14), name = "# of Players") +
+  scale_color_brewer(palette = "Set1", guide = "none") +
+  labs(
+    title = "Average Height vs. Average Free Throw % by Position",
+    x = "Average Height (inches)",
+    y = "Average Free Throw %"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title    = element_text(face = "bold")
+  )
+
+# Table-aidan — Average height vs. FT% by position
+
+#| label: tab-aidan
+#| fig-cap: "Provides the corresponding numerical values (Position, Avg Height, Avg FT%, # of Players)."
+pos_summary |>
+  arrange(desc(avg_ft_pct)) |>
+  kable(
+    caption = "Average Height and Free Throw Percentage by Position",
+    col.names = c("Position", "Avg Height (in)", "Avg Free Throw %", "# Players"),
+    align = c("l", "c", "c", "c")
+  )
 ```
