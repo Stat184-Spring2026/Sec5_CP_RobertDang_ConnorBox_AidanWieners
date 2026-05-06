@@ -410,7 +410,7 @@ Exact Response: "Bar chart comparing the correlation between player height and f
 Robert's code 
 ```{r}
 #| eval: false
-#| echo: true
+#| echo: true 
 #| results: hide
 
 # Tidyverse Style Guide
@@ -444,6 +444,10 @@ position_summary <- df |>
 ```
 
 ```{r}
+#| eval: false
+#| echo: true 
+#| results: hide
+
 #| fig-cap: "Height Distribution by Position for NBA Players with at Least 150 Free Throw Attempts (2025-2026 Season)"
 #| fig-alt: "A box plot showing NBA player height distribution across five positions ordered by median height from shortest to tallest: PG, SG, SF, PF, and C. Each box uses a distinct Set2 palette color with semi-transparent jittered points overlaid. Point guards cluster tightly near 74 inches, shooting guards near 77, small forwards near 79, and power forwards near 80. Centers have the highest median near 83 inches and the widest spread, with outliers exceeding 87 inches. The staircase pattern across positions suggests height is strongly associated with positional assignment in the NBA."
 
@@ -467,11 +471,9 @@ df |>
     plot.subtitle   = element_text(color = "grey40"),
     legend.position = "none"
   )
-```
-
-```{r}
 
 # Table for height summary by position
+
 df |>
   group_by(Position) |>
   summarise(
