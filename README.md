@@ -16,8 +16,9 @@ What we believe the answer to that question is that there is, in fact, a correla
 
 
 ## Data Sources and Acknowledgements
-
 Our data was collected from databallr.com, and was manually collected and compiled into an excel spreadsheet by our team to be saved as a csv file.
+
+“NBA Stats & Analytics.” Databallr, databallr.com/stats. Accessed 6 May 2026. 
 
 ## Current Plan
 Our current plan with this project is to figure out if certain player attributes, especially height and position, are related to how well NBA players shoot free throws. 
