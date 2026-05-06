@@ -246,6 +246,44 @@ These results suggest that while height is clearly associated with position, it 
 
 
 ## Aidan
+```{r}
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(knitr)
+
+# Tidy the data
+nba <- read_csv("NBAPlayerStats.csv") |>
+  rename(
+    ft_pct   = `FT%`,
+    height   = `Height (in)`,
+    position = Position
+  ) |>
+  mutate(
+    ft_pct = as.numeric(gsub("%", "", ft_pct)),
+    height = as.numeric(height)
+  )
+
+# Summarize by position
+pos_summary <- nba |>
+  group_by(position) |>
+  summarise(
+    avg_height = round(mean(height, na.rm = TRUE), 1),
+    avg_ft_pct = round(mean(ft_pct,  na.rm = TRUE), 1),
+    n_players  = n(),
+    .groups = "drop"
+  )
+
+# Table — Average height vs. FT% by position
+pos_summary |>
+  arrange(desc(avg_ft_pct)) |>
+  kable(
+    caption = "Average Height and Free Throw Percentage by Position",
+    col.names = c("Position", "Avg Height (in)", "Avg Free Throw %", "# Players"),
+    align = c("l", "c", "c", "c")
+  )
+```
 
 
 # Overall Conclusion
