@@ -251,8 +251,7 @@ When we look at each position as a whole, which position tends to shoot free thr
 To explore this, I summarized the data by position and created a bubble chart where each bubble represents one position to show the correlation.
 
 ```{r}
-#| eval: false
-#| echo: true
+#| echo: false
 
 #Tidyverse style guide
 library(readr)
@@ -282,8 +281,8 @@ pos_summary <- nba |>
     .groups = "drop"
   )
 ```
-@plot-aidan makes the trend pretty easy to see. You can see how there is little difference in the average FT% in guards and small forards, who also tend to shoot much more accurate than bigs, as they're all fairly even on the Y-axis. The scatter plot helps show a pretty consistent drop off in FT% as height rises, shown by about a 5% drop from small forwards to power forwards, and another 5% drop from power forwards to centers.
-We can see that players who are either point guards, shooting guards, or small forwards are on average 79 inches or shorter. From this we can make the observation that players in those positions typicially have the ideal attributes to shoot a much more accurate FT% compared to the larger positions in power forwards and centers.  
+@plot-aidan makes the trend pretty easy to see. You can see how there is little difference in the average FT% in guards and small forwards, who also tend to shoot much more accurate than bigs, as they're all fairly even on the Y-axis. The scatter plot helps show a pretty consistent drop off in FT% as height rises, shown by about a 5% drop from small forwards to power forwards, and another 5% drop from power forwards to centers.
+We can see that players who are either point guards, shooting guards, or small forwards are on average 79 inches or shorter. From this we can make the observation that players in those positions typically have the ideal attributes to shoot a much more accurate FT% compared to the larger positions in power forwards and centers.  
 
 ```{r}
 #Plot-aidan — Average height vs. FT% by position
