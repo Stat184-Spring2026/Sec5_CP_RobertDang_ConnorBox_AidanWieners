@@ -343,16 +343,50 @@ Taken together, the three analyses show that height is not as useful when predic
 
 - Connor Box:
 
-- Aidan Wieners:
+- Aidan Wieners:Third portion of the QMD (marked Aidan), README, 
 
 
 # AI Usage 
 Usage 1: Robert's alt text 05/06/26
 GenAI tool used: Anthropic Claude | Claude Sonnet 4.6(claude.ai) 
-Usage 2: Aidan's alt text 5/06/2026
-GenAI tool used: Arizona State University Image Accessibility Creator | https://asuo-ai-labs.streamlit.app/Image_Accessibility
-
 Prompt: "create an alt text for this data visualization involving nba player height and position df |> mutate(Position = reorder(Position, height)) |> ggplot(aes(x = Position, y = height, fill = Position)) + geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) + geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) + scale_fill_brewer(palette = "Set2") + scale_y_continuous(labels = function(x) paste0(x, '"')) + labs( title = "Height Distribution by Position", subtitle = "Positions ordered by median height", x = "Position", y = "Height (inches)" ) + theme_minimal(base_size = 13) + theme( plot.title = element_text(face = "bold"), plot.subtitle = element_text(color = "grey40"), legend.position = "none" ) use the fig-alt feature of R"
+
+Usage 2: Aidan's alt text for Fig-aigan and Tbl-aidan 5/06/2026
+GenAI tool used: Arizona State University Image Accessibility Creator | https://asuo-ai-labs.streamlit.app/Image_Accessibility
+Exact responses:
+Fig-Aidan: 
+"Long Description:
+
+The image is a scatter plot titled "Average Height vs. Average Free Throw % by Position." It features five different basketball positions depicted as colored circles: green for Point Guard (PG), orange for Shooting Guard (SG), purple for Small Forward (SF), blue for Power Forward (PF), and red for Center (C). The x-axis represents "Average Height (inches)", ranging from 76 to 82, and the y-axis represents "Average Free Throw %", ranging from 75.0 to 82.5. Each circle's size correlates with the number of players in that position. A legend on the right shows three black circles with sizes indicating 20, 25, and 30 players. PG is the highest on the graph with an average free throw percentage above 82.5. SG and SF are close to 80 and 82 respectively. PF has a lower average free throw percentage just above 77.5, and C has the largest height around 82 with a lower free throw percentage.
+
+Alt-text:
+
+Scatter plot of average height versus free throw percentage by basketball position.
+
+Transcribed Text:
+
+Average Height vs. Average Free Throw % by Position of Players
+20
+25
+30
+PG
+SG
+SF
+PF
+C"
+Tbl-Aidan: 
+"Long Description:
+
+The image is a table displaying basketball statistics for different player positions, specifically focusing on average height, average free throw percentage, and the number of players. The table has five rows, each representing a different position: Point Guard (PG), Small Forward (SF), Shooting Guard (SG), Power Forward (PF), and Center (C). Each row lists the average height in inches, average free throw percentage, and the number of players for that position. The information is conveyed in neat, aligned columns.
+
+Alt-text:
+
+Table showing average height, free throw percentage, and number of players for basketball positions.
+
+Transcribed Text:
+
+Average Height and Free Throw Percentage by Position Position Avg Height (in) Avg Free Throw % # Players PG 74.6 82.2 21 SF 79.0 81.7 29 SG 76.6 81.3 34 PF 80.4 77.5 17 C 82.9 73.5 25"
+
 
 Exact Response: "```{r}
 #| label: plot-robert
