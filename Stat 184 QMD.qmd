@@ -85,7 +85,6 @@ These transformations ensure that the data are consistent and suitable for analy
 In this section, we look at if the height and position of the players and see if they correlate, which is the basis of our overall analysis. 
 
 ```{r}
-#| label: robert-setup
 #| echo: false
 #| warning: false
 #| message: false
@@ -375,7 +374,6 @@ Exact Response: "Bar chart comparing the correlation between player height and f
 # Appendix: Code
 Robert's code 
 ```{r}
-#| label: robert-setup
 #| eval: false
 #| echo: true
 #| results: hide
