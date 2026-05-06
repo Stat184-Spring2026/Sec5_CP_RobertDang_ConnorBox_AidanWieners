@@ -281,13 +281,13 @@ pos_summary <- nba |>
     .groups = "drop"
   )
 ```
-@plot-aidan makes the trend pretty easy to see. You can see how there is little difference in the average FT% in guards and small forwards, who also tend to shoot much more accurate than bigs, as they're all fairly even on the Y-axis. The scatter plot helps show a pretty consistent drop off in FT% as height rises, shown by about a 5% drop from small forwards to power forwards, and another 5% drop from power forwards to centers.
+@fig-aidan makes the trend pretty easy to see. You can see how there is little difference in the average FT% in guards and small forwards, who also tend to shoot much more accurate than bigs, as they're all fairly even on the Y-axis. The scatter plot helps show a pretty consistent drop off in FT% as height rises, shown by about a 5% drop from small forwards to power forwards, and another 5% drop from power forwards to centers.
 We can see that players who are either point guards, shooting guards, or small forwards are on average 79 inches or shorter. From this we can make the observation that players in those positions typically have the ideal attributes to shoot a much more accurate FT% compared to the larger positions in power forwards and centers.  
 
 
 ```{r}
 #Plot-aidan — Average height vs. FT% by position
-#| label: plot-aidan
+#| label: figure-aidan
 #| fig-cap: "Average height vs. average FT% by position. Bubble size shows number of players in each group."
 #| fig-alt: "Scatter plot of average height vs. free throw percentage by basketball position."
 ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
@@ -306,13 +306,13 @@ ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
     plot.title    = element_text(face = "bold")
   )
 ``` 
-@table-aidan helps viewers clearly see how close the FT% really is between point guards, shooting guards, and small forwards, even given the signifigant average height difference from PG-SF.
+@tbl-aidan helps viewers clearly see how close the FT% really is between point guards, shooting guards, and small forwards, even given the signifigant average height difference from PG-SF.
 Having the actual numbers displayed in addition to the table really helps add emphasis on those three positions shooting within 1.1% of each other on average. 
 
 ```{r}
 # Table-aidan — Average height vs. FT% by position
 
-#| label: tab-aidan
+#| label: tbl-aidan
 #| fig-cap: "Provides the corresponding numerical values (Position, Avg Height, Avg FT%, # of Players)."
 #| fig-alt: "Table showing average height, free throw percentage, and number of players for basketball positions."
 
