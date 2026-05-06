@@ -362,6 +362,10 @@ Exact Response: "```{r}
 
 The fig-alt chunk option is the Quarto-native way to attach accessibility alt text to a figure. It gets embedded in the rendered HTML output as the alt attribute on the image tag, separate from fig-cap which appears as a visible caption below the plot. If you are rendering to PDF, fig-alt is silently ignored since PDFs handle accessibility differently, but it is still good practice to include it."
 
+Usage 2: Connor's alt text 05/06/26  
+GenAI tool used: OpenAI ChatGPT-5.5 (chatgpt.com)  
+Prompt: "create a short alt text for this data visualization involving nba player height and free throw percentage by position"  
+Exact Response: "Bar chart comparing the correlation between player height and free throw percentage across NBA positions (C, PF, PG, SF, SG). Most correlations are close to zero, indicating little relationship between height and free throw shooting within positions. Centers show a small positive correlation, while shooting guards show the strongest negative correlation."
 
 # Appendix: Code
 Robert's code 
