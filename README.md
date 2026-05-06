@@ -8,8 +8,12 @@ To keep things cleaner, we only looked at players who took at least 150 free thr
 
 ### Interesting Insight
 
-As average player height goes up across positions, free throw percentage tends to go down. Guards usually have the highest FT% while centers have the lowest. The bubble size in the plot shows how many players are at each position.
-(Make sure to paste visulization.)
+One interesting insight we found is that compared to all the other positions, power forowards shoot free throws signifigantly less, being the only position to have less than 20 players attempt 150 free throws. One reason we think this may be is that compared to centers, their accuracy is much higher so theres a lot more risk in defending a power forward aggressivly because they're more likely to make their free throws.
+That leads us to question why even though they take much more attempts, centers still struggle signifigantly more than power forwards at the free throw line.
+What we beleive the answer to that question is that there is, in fact, a correlation between a player's height and their free throw accuracy; but this downtrend may start at a taller height we beleive to be about 80 inches (6 ft. 8 in.).
+
+<img width="1874" height="1150" alt="b12f3488-5f0d-4a12-b898-15f877604c40" src="https://github.com/user-attachments/assets/bb428208-4558-4c62-a72d-d16908861477" />
+
 
 ## Data Sources and Acknowledgements
 
