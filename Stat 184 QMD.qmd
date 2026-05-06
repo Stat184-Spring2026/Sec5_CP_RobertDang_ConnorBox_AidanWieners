@@ -349,6 +349,8 @@ Taken together, the three analyses show that height is not as useful when predic
 # AI Usage 
 Usage 1: Robert's alt text 05/06/26
 GenAI tool used: Anthropic Claude | Claude Sonnet 4.6(claude.ai) 
+Usage 2: Aidan's alt text 5/06/2026
+GenAI tool used: Arizona State University Image Accessibility Creator | https://asuo-ai-labs.streamlit.app/Image_Accessibility
 
 Prompt: "create an alt text for this data visualization involving nba player height and position df |> mutate(Position = reorder(Position, height)) |> ggplot(aes(x = Position, y = height, fill = Position)) + geom_boxplot(alpha = 0.7, outlier.shape = 21, outlier.size = 2) + geom_jitter(width = 0.15, alpha = 0.4, size = 1.5) + scale_fill_brewer(palette = "Set2") + scale_y_continuous(labels = function(x) paste0(x, '"')) + labs( title = "Height Distribution by Position", subtitle = "Positions ordered by median height", x = "Position", y = "Height (inches)" ) + theme_minimal(base_size = 13) + theme( plot.title = element_text(face = "bold"), plot.subtitle = element_text(color = "grey40"), legend.position = "none" ) use the fig-alt feature of R"
 
