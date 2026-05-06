@@ -345,7 +345,7 @@ Taken together, the three analyses show that height is not as useful when predic
 
 - Robert Dang: The first portion of the QMD (marked Robert), GitHub repo setup, the introduction portion, data provenance, FAIR and CARE portions of the QMD
 
-- Connor Box:
+- Connor Box: Second portion of Exploratory Analysis, QMD file Structure.
 
 - Aidan Wieners: Collecting data, The third portion of the QMD (marked Aidan), create README. 
 
