@@ -138,7 +138,10 @@ df |>
     plot.subtitle   = element_text(color = "grey40"),
     legend.position = "none"
   )
+``` 
+Box plot showing NBA player height distribution by position, ordered by median height from shortest to tallest: PG (~74"), SG (~77"), SF (~79"), PF (~80"), and C (~82"). Centers show the greatest spread and tallest outliers; point guards are the shortest and most compact group.
 
+```{r}
 # Table for height summary by position
 df |>
   group_by(Position) |>
@@ -171,11 +174,9 @@ follow a staircase pattern from PG to C, suggesting that
 height is a strong defining characteristic of positional assignment in 
 the NBA. Also, most positions have relatively tight height 
 distributions, meaning players at the same position tend to be similar 
-in height. Centers show the widest spread, ranging from 80.8 to 88.0 
-inches, indicating more variation at that position than any other. 
-Point guards, by contrast, are tightly clustered between 72.5 and 77.5 
-inches, with very little variation.
-
+in height. This clear correlation between height and position sets up our 
+further research into how these attributes affect
+the free throw percentage of the players in our dataset.
 
 ## Connor
 
@@ -330,12 +331,19 @@ pos_summary |>
 
 # Author Contributions
 
-- Robert Dang:
+- Robert Dang: The first portion of the QMD (marked Robert), GitHub repo setup, the introduction portion, data provenance, FAIR and CARE portions of the QMD
+
 - Connor Box:
+
 - Aidan Wieners:
 
 
 # AI Usage 
+Usage 1: Robert's alt text 05/06/26
+GenAI tool used: Anthropic Claude | Claude Sonnet 4.6(claude.ai) 
+Prompt: "create a short alt text for this data visualization involving nba player height and position"
+Exact Response: "Here's alt text for this visualization:
+Short alt text (for most contexts): Box plot showing NBA player height distribution by position, ordered by median height from shortest to tallest: PG (~74"), SG (~77"), SF (~79"), PF (~80"), and C (~82"). Centers show the greatest spread and tallest outliers; point guards are the shortest and most compact group."
 
 
 # Appendix: Code
