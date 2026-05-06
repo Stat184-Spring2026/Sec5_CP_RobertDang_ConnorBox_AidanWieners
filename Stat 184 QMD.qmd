@@ -347,7 +347,7 @@ Taken together, the three analyses show that height is not as useful when predic
 
 - Connor Box:
 
-- Aidan Wieners:The third portion of the QMD (marked Aidan), README, 
+- Aidan Wieners: Collecting data, The third portion of the QMD (marked Aidan), create README. 
 
 
 # AI Usage 
