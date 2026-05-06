@@ -179,7 +179,7 @@ inches, with very little variation.
 
 ## Connor
 
-This section examines whether a player’s height is related to their free throw percentage within each position. To evaluate this, we calculate the correlation between height and free throw percentage for each position.
+This section examines whether a player’s height is related to their free throw percentage within each NBA position. While Robert showed that height differs significantly across positions, this analysis focuses on whether taller or shorter players within the same role tend to shoot free throws more effectively. To evaluate this relationship, we calculate the correlation between height and free throw percentage for each position.
 
 ```{r}
 library(tidyverse)
@@ -209,13 +209,12 @@ position_corr <- nba_clean |>
   )
 ```
 
-As shown in @fig-connor, most positions exhibit correlations close to zero, indicating little to no linear relationship between height and free throw percentage within those groups. This suggests that among players who already share a similar role and general body type, being slightly taller or shorter does not meaningfully impact free throw performance.
-
+As shown in @fig-connor, most positions exhibit correlations close to zero, indicating little to no linear relationship between height and free throw percentage within those groups. This suggests that among players who already share a similar role and body type, being slightly taller or shorter does not meaningfully impact free throw shooting ability.
 
 ```{r}
 #| label: fig-connor
 #| fig-cap: "Correlation between height and free throw percentage by position."
-#| fig-alt: "Bar chart showing correlation between height and free throw percentage for each NBA position."
+#| fig-alt: "Bar chart comparing the correlation between player height and free throw percentage across NBA positions (C, PF, PG, SF, SG). Most correlations are close to zero, indicating little relationship between height and free throw shooting within positions. Centers show a small positive correlation, while shooting guards show the strongest negative correlation."
 #| fig-pos: "H"
 
 ggplot(position_corr, aes(x = position, y = correlation)) +
@@ -228,12 +227,12 @@ ggplot(position_corr, aes(x = position, y = correlation)) +
   theme_minimal()
 ```
 
-@tbl-connor provides the corresponding numerical values. While centers show a modest positive correlation and shooting guards show a more noticeable negative correlation, these patterns are inconsistent across positions and likely reflect variation within the sample rather than a strong underlying trend.
-
+@tbl-connor provides the corresponding numerical values. Centers show a modest positive correlation (0.27), while shooting guards show a more noticeable negative correlation (-0.47). However, because the results vary across positions and most correlations remain relatively weak, the overall pattern suggests that height alone is not a consistent predictor of free throw performance within a position group.
 
 ```{r}
 #| label: tbl-connor
 #| tbl-cap: "Correlation between height and free throw percentage by position."
+#| tbl-pos: "H"
 
 kable(
   position_corr,
@@ -241,7 +240,7 @@ kable(
 )
 ```
 
-These results suggest that while height is clearly associated with position, it is not a strong predictor of free throw shooting within positions. In other words, once players are grouped by position, differences in height do not explain much of the variation in free throw percentage, indicating that shooting ability is driven more by individual skill than physical size.
+These results complement Robert’s findings by showing that although height is strongly associated with NBA position, it does not explain much of the variation in free throw percentage once players are compared within the same position. This also helps support Aidan’s broader positional analysis, which examines how average free throw percentages differ across positions overall. Together, the analyses suggest that free throw shooting ability is driven more by individual skill and technique than by small differences in player height.
 
 
 
@@ -421,13 +420,17 @@ Connor's code
 #| eval: false
 #| echo: true
 
+
 ### Author: Connor Box
 
+# Step 1: Load packages
 library(tidyverse)
 library(knitr)
 
+# Step 2: Load the NBA player data
 nba_raw <- read_csv("NBAPlayerStats.csv")
 
+# Step 3: Clean the data and rename columns
 nba_clean <- nba_raw |>
   rename(
     position = Position,
@@ -439,6 +442,7 @@ nba_clean <- nba_raw |>
     height_in = as.numeric(height_in)
   )
 
+# Step 4: Calculate the correlation between height and free throw percentage by position
 position_corr <- nba_clean |>
   group_by(position) |>
   summarise(
@@ -449,6 +453,12 @@ position_corr <- nba_clean |>
     .groups = "drop"
   )
 
+# Step 5: Create a bar chart showing the correlations by position
+#| label: fig-connor
+#| fig-cap: "Correlation between height and free throw percentage by position."
+#| fig-alt: "Bar chart comparing the correlation between player height and free throw percentage across NBA positions (C, PF, PG, SF, SG). Most correlations are close to zero, indicating little relationship between height and free throw shooting within positions. Centers show a small positive correlation, while shooting guards show the strongest negative correlation."
+#| fig-pos: "H"
+
 ggplot(position_corr, aes(x = position, y = correlation)) +
   geom_col(fill = "skyblue") +
   geom_hline(yintercept = 0, linetype = "dashed") +
@@ -457,6 +467,11 @@ ggplot(position_corr, aes(x = position, y = correlation)) +
     y = "Correlation"
   ) +
   theme_minimal()
+
+# Step 6: Create a table showing the correlation values and summary statistics
+#| label: tbl-connor
+#| tbl-cap: "Correlation between height and free throw percentage by position."
+#| tbl-pos: "H"
 
 kable(
   position_corr,
