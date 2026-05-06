@@ -1,0 +1,55 @@
+﻿Initial Plan
+
+
+Goal: Find a dataset to develop our skills in wrangling and analyzing data, and create a clear visualization that's easy to digest.
+
+
+What is your team going to need in order to achieve your goals?
+
+
+Nouns: dataset, GitHub repo, RStudio, QMD file, report, README
+
+
+Verbs: wrangling, analyzing, scraping, and tidying data, creating visualizations, pushing, pulling, and committing in git, self-evaluating
+
+
+In the space below, write out the steps your team currently thinks you are going to need to go through. Be sure to incorporate initial tags of where you'll work together and which member might take the lead responsibility.
+
+
+1. All members search for a dataset
+
+
+2. Scrape the data to find trends
+
+
+3. Once a narrative is agreed on, save the dataset for later use
+
+
+4. One team member creates a GitHub repo to act as the home for the project
+
+
+5. Invite the other team members
+
+
+6. Create a README for the project
+
+
+7. Open a QMD file for the final report in RStudio
+
+
+8. Work together to use RStudio to wrangle and tidy the data
+
+
+9. Create multiple data visualizations to help all members and readers understand the data
+
+
+10. Write the summaries and findings for each visualization
+
+
+11. Make sure the final report has no clutter and is formatted correctly
+
+
+12. One member renders the PDF and adds it to the repo
+
+
+13. Perform self and peer evaluations
