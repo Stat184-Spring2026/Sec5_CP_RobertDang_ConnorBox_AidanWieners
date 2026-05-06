@@ -291,7 +291,7 @@ We can see that players who are either point guards, shooting guards, or small f
 
 ```{r}
 #Plot-aidan — Average height vs. FT% by position
-#| label: figure-aidan
+#| label: fig-aidan
 #| fig-cap: "Average height vs. average FT% by position. Bubble size shows number of players in each group."
 #| fig-alt: "Scatter plot of average height vs. free throw percentage by basketball position."
 ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
