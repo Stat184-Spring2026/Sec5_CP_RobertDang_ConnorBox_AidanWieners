@@ -246,8 +246,9 @@ These results suggest that while height is clearly associated with position, it 
 
 
 ## Aidan
-```{r}
+(Rundown of my part)
 
+```{r}
 library(readr)
 library(dplyr)
 library(ggplot2)
@@ -275,7 +276,34 @@ pos_summary <- nba |>
     .groups = "drop"
   )
 
-# Table — Average height vs. FT% by position
+#Plot-aidan — Average height vs. FT% by position
+#| label: plot-aidan
+#| fig-cap: "Average height vs. average FT% by position. Bubble size shows number of players in each group."
+
+ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
+                        size = n_players, color = position)) +
+  geom_point(alpha = 0.8) +
+  geom_text(aes(label = position), color = "black", size = 4, hjust = 0.5, vjust = 0.5)+  
+  scale_size_continuous(range = c(6, 14), name = "# of Players") +
+  scale_color_brewer(palette = "Set1", guide = "none") +
+  labs(
+    title = "Average Height vs. Average Free Throw % by Position",
+    x = "Average Height (inches)",
+    y = "Average Free Throw %"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title    = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "grey40")
+  )
+``` 
+(Plot description)
+
+```{r}
+# Table-aidan — Average height vs. FT% by position
+
+#| label: tab-aidan
+#| fig-cap: "Provides the corresponding numerical values (Position, Avg Height, Avg FT%, # of Players)."
 pos_summary |>
   arrange(desc(avg_ft_pct)) |>
   kable(
@@ -284,7 +312,8 @@ pos_summary |>
     align = c("l", "c", "c", "c")
   )
 ```
-
+This table helps viewers clearly see how close the FT% really is between point guards, shooting guards, and small forwards, even given the signifigant average height difference from PG-SF.
+Having the actual numbers displayed in addition to the table really helps add emphasis on those three positions shooting within 1.1% of each other on average. 
 
 # Overall Conclusion
 
