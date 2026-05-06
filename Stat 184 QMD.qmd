@@ -539,7 +539,7 @@ pos_summary <- nba |>
   )
 
 #Plot-aidan — Average height vs. FT% by position
-#| label: plot-aidan
+#| label: figure-aidan
 #| fig-cap: "Average height vs. average FT% by position. Bubble size shows number of players in each group."
 #| fig-alt: "Scatter plot of average height vs. free throw percentage by basketball position."
 
@@ -561,7 +561,7 @@ ggplot(pos_summary, aes(x = avg_height, y = avg_ft_pct,
 
 # Table-aidan — Average height vs. FT% by position
 
-#| label: tab-aidan
+#| label: tbl-aidan
 #| fig-cap: "Provides the corresponding numerical values (Position, Avg Height, Avg FT%, # of Players)."
 #| fig-alt: "Table showing average height, free throw percentage, and number of players for basketball positions."
 pos_summary |>
