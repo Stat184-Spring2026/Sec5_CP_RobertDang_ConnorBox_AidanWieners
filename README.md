@@ -6,7 +6,7 @@ This repo will display our data visulisations and findings while exploring if th
 We are exploring if a player's height, wingspan, free throw attempts, and position have any real relationship with their FT%. 
 To keep things cleaner, we only looked at players who took at least 150 free throws this season. 
 
-### Interesting Insight (Optional)
+### Interesting Insight
 
 As average player height goes up across positions, free throw percentage tends to go down. Guards usually have the highest FT% while centers have the lowest. The bubble size in the plot shows how many players are at each position.
 (Make sure to paste visulization.)
