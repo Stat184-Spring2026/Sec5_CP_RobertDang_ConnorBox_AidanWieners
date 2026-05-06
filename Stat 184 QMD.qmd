@@ -347,6 +347,10 @@ Prompt: "create a short alt text for this data visualization involving nba playe
 Exact Response: "Here's alt text for this visualization:
 Short alt text (for most contexts): Box plot showing NBA player height distribution by position, ordered by median height from shortest to tallest: PG (~74"), SG (~77"), SF (~79"), PF (~80"), and C (~82"). Centers show the greatest spread and tallest outliers; point guards are the shortest and most compact group."
 
+Usage 2: Connor's alt text 05/06/26  
+GenAI tool used: OpenAI ChatGPT-5.5 (chatgpt.com)  
+Prompt: "create a short alt text for this data visualization involving nba player height and free throw percentage by position"  
+Exact Response: "Bar chart comparing the correlation between player height and free throw percentage across NBA positions (C, PF, PG, SF, SG). Most correlations are close to zero, indicating little relationship between height and free throw shooting within positions. Centers show a small positive correlation, while shooting guards show the strongest negative correlation."
 
 # Appendix: Code
 Robert's code 
